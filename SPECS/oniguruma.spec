@@ -1,6 +1,6 @@
 Name:		oniguruma
 Version:	6.8.2
-Release:	2%{?dist}
+Release:	2.1%{?dist}
 Summary:	Regular expressions library
 
 Group:		System Environment/Libraries
@@ -10,6 +10,11 @@ Source0:	https://github.com/kkos/oniguruma/releases/download/v%{version}/onig-%{
 # Backport https://src.fedoraproject.org/rpms/oniguruma/blob/f29/f/0100-Apply-CVE-2019-13325-fix-to-6.9.1.patch
 # (upstream: https://github.com/kkos/oniguruma/commit/c509265c5f6ae7264f7b8a8aae1cfa5fc59d108c)
 Patch100:	oniguruma-6.8.2-CVE-2019-13225-fix.patch
+Patch101:	oniguruma-6.8.2-CVE-2019-13224-fix.patch
+Patch102:	oniguruma-6.8.2-CVE-2019-16163-fix.patch
+Patch103:	oniguruma-6.8.2-CVE-2019-19012-fix.patch
+Patch104:	oniguruma-6.8.2-CVE-2019-19203-fix.patch
+Patch105:	oniguruma-6.8.2-CVE-2019-19204-fix.patch
 
 %description
 Oniguruma is a regular expressions library.
@@ -46,6 +51,11 @@ done
 %endif
 
 %patch100 -p1 -b .CVE-2019-13225
+%patch101 -p1 -b .CVE-2019-13224
+%patch102 -p1 -b .CVE-2019-16163
+%patch103 -p1 -b .CVE-2019-19012
+%patch104 -p1 -b .CVE-2019-19203
+%patch105 -p1 -b .CVE-2019-19204
 
 %build
 %configure \
@@ -102,6 +112,18 @@ find $RPM_BUILD_ROOT -name '*.la' \
 %{_libdir}/pkgconfig/%{name}.pc	
 
 %changelog
+* Fri Jan 05 2024 Vitezslav Crhonek <vcrhonek@redhat.com> - 6.8.2-2.1
+- Fix CVE-2019-13224
+  Resolves: RHEL-20648
+- Fix CVE-2019-16163
+  Resolves: RHEL-20642
+- Fix CVE-2019-19012
+  Resolves: RHEL-20636
+- Fix CVE-2019-19203
+  Resolves: RHEL-20630
+- Fix CVE-2019-19204
+  Resolves: RHEL-20624
+
 * Fri Jun 26 2020 Jiri Kucera <jkucera@redhat.com> - 6.8.2-2
 - Fix CVE-2019-13225
   Resolves: #1771052
